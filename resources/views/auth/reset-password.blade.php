@@ -25,7 +25,7 @@
             <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required>
         </div>
         
-        <input  type="submit" class="btn btn-primary btn-lg btn-block" style="background: linear-gradient(-60deg, #3DA9FC 50%, #FF8C67 50%); border: none;" value="Register">
+        <input  type="submit" class="btn btn-primary btn-lg btn-block" style="background: linear-gradient(-60deg, #3DA9FC 50%, #FF8C67 50%); border: none;" value="Reset">
         <div class="bottom">
             <span>Already registered? <a href="{{route('login')}}">Login</a></span> 
         </div>

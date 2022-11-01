@@ -9,7 +9,7 @@
     
     <form method="POST" action="{{ route('register') }}">
         @csrf
-        <input type="hidden" value="dealer">
+        <input type="hidden" name="type" value="dealer">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" name="name" value="{{old('name')??''}}" placeholder="Name">

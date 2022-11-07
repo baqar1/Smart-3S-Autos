@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <h4 class="text-light bg-dark" style="text-align: center; padding: 10px; margin-top: 5px;">Add New Spare Parts</h4>
+                            <h4 class="text-light bg-dark" style="text-align: center; padding: 10px; margin-top: 5px;"> @if($spare->exists) Edit Spare Parts @else Add New Spare Parts @endif</h4>
                         </div>
                         <form action="{{route('spare.parts.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -98,7 +98,7 @@
                                     </div>
     
                                 </div>
-                                <input  type="submit" class="btn btn-primary btn-lg btn-block" style="background: linear-gradient(-60deg, #3DA9FC 50%, #FF8C67 50%); border: none; width:50%" value="Submit">
+                                <input  type="submit" class="btn btn-primary btn-lg btn-block" style="background: linear-gradient(-60deg, #3DA9FC 50%, #FF8C67 50%); border: none; width:50%" value="@if($spare->exists)Update @else Submit @endif">
                             </div>
 
                         </form>

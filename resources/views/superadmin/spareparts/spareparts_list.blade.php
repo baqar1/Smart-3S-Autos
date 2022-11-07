@@ -40,7 +40,7 @@
                                             <td>{{ $record->price }}</td>
                                             <td>
                                                 <div style="display: flex;">
-                                                    <a href="{{route('spare.parts.edit',[$record->id])}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{route('spare.parts.view',[$record->id])}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                                                     &nbsp;
                                                     <form method="POST" action="{{route('spare.parts.delete',[$record->id])}}">
                                                         @csrf

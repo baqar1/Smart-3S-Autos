@@ -31,6 +31,21 @@ Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
    Route::get('/dealer-add','App\Http\Controllers\SuperAdmin\DealersController@dealerAdd')->name('dealer.add');
    //store dealer
    Route::post('/dealer-store','App\Http\Controllers\SuperAdmin\DealersController@dealerStore')->name('dealer.store'); 
+   //spareparts crud
+
+   //spareparts list
+   Route::get('/spare-parts-list','App\Http\Controllers\SuperAdmin\SparePartsController@sparePartsList')->name('spare.parts.list');
+
+   //spare parts create or edit
+   Route::get('/spare-parts-view/{spare?}','App\Http\Controllers\SuperAdmin\SparePartsController@sparePartsView')->name('spare.parts.view');
+  
+   //spareparts store and update
+   Route::post('/spare-parts-store','App\Http\Controllers\SuperAdmin\SparePartsController@sparePartsStore')->name('spare.parts.store');
+
+   //spare parts delete
+   Route::post('/spare-parts-delete/{spare}','App\Http\Controllers\SuperAdmin\SparePartsController@sparePartsDelete')->name('spare.parts.delete');
+
+
 });
 
 // Route::get('/dashboard', function () {

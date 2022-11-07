@@ -1,10 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<style>
-    .error{
-        color: red;
-    }
-</style>
 <div class="body">
     <form method="POST" action="{{ route('dealer.store') }}">
         @csrf

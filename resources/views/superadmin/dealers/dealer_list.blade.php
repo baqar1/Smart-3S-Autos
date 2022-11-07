@@ -37,7 +37,7 @@
                               </label>
                         </td>
                         <td>
-                            <a href="{{route('dealer.edit',[$dealer->id])}}"><i class="fa fa-edit" style="color: #01c7b8"></i></a>
+                            <a href="{{route('dealer.edit',[$dealer->id])}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                         </td>
                     </tr>
                 @endforeach

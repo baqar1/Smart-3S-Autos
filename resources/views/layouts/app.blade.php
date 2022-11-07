@@ -110,6 +110,9 @@
         .slider.round:before {
           border-radius: 50%;
         }
+        .error{
+            color: red;
+        }
     </style>
     @yield('styles')
 </head>
@@ -174,6 +177,14 @@
                         <ul @if(\Request::route()->getName() == 'dealers_list' || \Request::route()->getName() == 'add_dealer') class="collapse in" aria-expanded="true" @endif>
                             <li @if(\Request::route()->getName() == 'dealer.list') class="active" @endif><a href="{{route('dealer.list')}}">All Dealers</a></li>
                             <li @if(\Request::route()->getName() == 'dealer.add') class="active" @endif><a href="{{route('dealer.add')}}">Add New Dealers</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; SpareParts </span></a>
+                        <ul @if(\Request::route()->getName() == 'spare.parts.list' || \Request::route()->getName() == 'spare.parts.view') class="collapse in" aria-expanded="true" @endif>
+                            <li @if(\Request::route()->getName() == 'spare.parts.list') class="active" @endif><a href="{{route('spare.parts.list')}}">SpareParts List</a></li>
+                            <li @if(\Request::route()->getName() == 'spare.parts.view') class="active" @endif><a href="{{route('spare.parts.view')}}">Add New SparePart</a></li>
                         </ul>
                     </li>
                  

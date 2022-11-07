@@ -20,13 +20,17 @@ Route::get('/', function () {
 Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
     Route::get('/dashboard','App\Http\Controllers\SuperAdmin\DahboardController@index')->name('dashboard');
     //get all dealers
-    Route::get('/dealer-list','App\Http\Controllers\SuperAdmin\DealersController@dealerList')->name('dealers_list');
+    Route::get('/dealer-list','App\Http\Controllers\SuperAdmin\DealersController@dealerList')->name('dealer.list');
     //active or deactive dealers
     Route::get('/dealer-status','App\Http\Controllers\SuperAdmin\DealersController@dealerStatus')->name('dealer.status');
     //edit dealer
     Route::get('/dealer-edit/{dealer}','App\Http\Controllers\SuperAdmin\DealersController@dealerEdit')->name('dealer.edit');
     //update dealer
     Route::post('/dealer-update{dealer}','App\Http\Controllers\SuperAdmin\DealersController@dealerUpdate')->name('dealer.update');
+   //add dealer
+   Route::get('/dealer-add','App\Http\Controllers\SuperAdmin\DealersController@dealerAdd')->name('dealer.add');
+   //store dealer
+   Route::post('/dealer-store','App\Http\Controllers\SuperAdmin\DealersController@dealerStore')->name('dealer.store'); 
 });
 
 // Route::get('/dashboard', function () {

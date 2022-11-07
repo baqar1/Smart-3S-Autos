@@ -34,7 +34,7 @@
         <div class="form-group">
             <label for="" style="display: block;">Status</label>
             <label class="switch">
-                <input type="checkbox" class="form-control" data-id="{{$dealer->id}}" value="1" {{($dealer->status =='1')?'checked':''}}>
+                <input type="checkbox" name="status" class="form-control" value="1" {{($dealer->status =='1')?'checked':''}}>
                 <span class="slider round"></span>
             </label>
               

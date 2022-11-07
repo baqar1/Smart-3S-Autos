@@ -37,7 +37,7 @@
                               </label>
                         </td>
                         <td>
-                            <a href="{{route('dealer.edit',[$dealer->id])}}">Edit</a>
+                            <a href="{{route('dealer.edit',[$dealer->id])}}"><i class="fa fa-edit" style="color: #01c7b8"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -58,14 +58,12 @@
                 url: "{{route('dealer.status')}}",
                 data: {value:value,dealer_id:dealer_id},
                 success:function(response){
-                    if(response.result==true){
-                        if(response.info){
-                            toastr.info(response.message);
+                    if(response.result=='1'){
+                        toastr.success(response.success);
+                    }
+                    else if(response.result=='0'){
+                        toastr.info(response.info);
 
-                        }
-                        else{
-                            toastr.success(response.message);
-                        }
                     }
                     else{
                         toastr.danger('Something went wrong');

@@ -89,11 +89,11 @@
         }
         
         input:checked + .slider {
-          background-color: #2196F3;
+          background-color: #01c7b8;
         }
         
         input:focus + .slider {
-          box-shadow: 0 0 1px #2196F3;
+          box-shadow: 0 0 1px #01c7b8;
         }
         
         input:checked + .slider:before {
@@ -172,8 +172,8 @@
                     <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Dealers Management </span></a>
                         <ul @if(\Request::route()->getName() == 'dealers_list' || \Request::route()->getName() == 'add_dealer') class="collapse in" aria-expanded="true" @endif>
-                            <li @if(\Request::route()->getName() == 'dealers_list') class="active" @endif><a href="{{route('dealers_list')}}">All Dealers</a></li>
-                            <li @if(\Request::route()->getName() == 'add_dealer') class="active" @endif><a href="#">Add New Dealers</a></li>
+                            <li @if(\Request::route()->getName() == 'dealer.list') class="active" @endif><a href="{{route('dealer.list')}}">All Dealers</a></li>
+                            <li @if(\Request::route()->getName() == 'dealer.add') class="active" @endif><a href="{{route('dealer.add')}}">Add New Dealers</a></li>
                         </ul>
                     </li>
                  
@@ -247,7 +247,7 @@
   @endif
   
   @if (Session::has('success'))
-        toastr.options.positionClass = 'toast-bottom-right';
+        toastr.options.positionClass = 'toast-top-right';
         toastr.success("{{ Session::get('success') }}");
   @endif
   
@@ -302,10 +302,10 @@
 <script>
     
 
-    $(function () {
-    // Summernote
-    $('.textarea').summernote()
-  })
+//     $(function () {
+//     // Summernote
+//     $('.textarea').summernote()
+//   })
   </script>
 
   

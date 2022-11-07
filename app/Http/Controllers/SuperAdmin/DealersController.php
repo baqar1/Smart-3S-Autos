@@ -15,24 +15,21 @@ class DealersController extends Controller
         return view('superadmin.dealers.dealer_list')->with('dealers',$dealers);
     }
     public function dealerStatus(Request $request){
-        $message = '';
         if($request->dealer_id){
             $dealer = User::find($request->dealer_id);
             if($request->value=='true'){
                 $dealer->update(['status'=>'1']);
                 $message = 'Dealer activated successfully';
-                $info = false;
+                return response()->json(['result'=>'1','success'=>$message]);
             }
             else{
                 $dealer->update(['status'=>'0']);
                 $message = 'Dealer deactivated successfully';
-                $info = true;
-    
+                return response()->json(['result'=>'0','info'=>$message]);    
             }
-            return response()->json(['result'=>true,'message'=>$message,'info'=>$info]);
         }
         else{
-            return response()->json(['result'=>true]);
+            return response()->json(['result'=>false]);
 
         }
     }
@@ -52,12 +49,35 @@ class DealersController extends Controller
             'email' => $request->email,
             'password' => ($request->password!=null)?Hash::make($request->password):$dealer->password,
             'type'=>$request->type,
+            'status'=>($request->status!=null)?$request->status:0,
         ]);
         if($user){
-            return redirect()->route('dealers_list')->with('success','Dealer updated successfully');
+            return redirect()->route('dealer.list')->with('success','Dealer updated successfully');
         }
         else{
-            return redirect()->route('dealers_list')->with('error','Something went wrong');
+            return redirect()->route('dealer.list')->with('error','Something went wrong');
         }
+    }
+
+    public function dealerAdd(){
+        return view('superadmin.dealers.dealer_add');
+    }
+    public function dealerStore(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type'=>$request->type,
+            'status'=>($request->status!=null)?$request->status:0,
+        ]);
+
+        return redirect()->route('dealer.list')->with('success','New dealer created successfully');
     }
 }

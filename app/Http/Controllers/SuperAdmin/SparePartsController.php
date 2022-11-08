@@ -4,17 +4,19 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SpareParts;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SparePartsController extends Controller
 {
     public function sparePartsList(){
-        $records = SpareParts::get();
+        $records = SpareParts::with('dealer')->get();
         return view('superadmin.spareparts.spareparts_list',compact('records'));
     }
 
     public function sparePartsView(SpareParts $spare){
-        return view('superadmin.spareparts.spareparts_view',compact('spare'));
+        $dealers = User::where('type','dealer')->where('status','1')->get();
+        return view('superadmin.spareparts.spareparts_view',compact('spare','dealers'));
     }
 
     public function sparePartsStore(Request $request){
@@ -27,9 +29,11 @@ class SparePartsController extends Controller
             'price' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'workshop_name' => ['required', 'string', 'max:255'],
-            'img' => ['mimes:jpeg,jpg,png,gif']
+            'img' => ['mimes:jpeg,jpg,png,gif'],
+            'dealer_id'=>['required']
             
         ]);
+        $message = '';
         
         if($request->img){
             $imageName = time().'.'.$request->img->extension();  
@@ -40,9 +44,11 @@ class SparePartsController extends Controller
             if($request->id){
                 $spare = SpareParts::find($request->id);
                 $imageName = $spare->img;
+                $message = 'Spare Part updated successfully';
             }
             else{
                 $imageName = null;
+                $message = 'New Spare Part created successfully';
             }
 
         }
@@ -58,11 +64,12 @@ class SparePartsController extends Controller
                 'price'=>$request->price,
                 'address'=>$request->address,
                 'workshop_name'=>$request->workshop_name,
-                'img'=>$imageName
+                'img'=>$imageName,
+                'dealer_id'=>$request->dealer_id
             ]
         );
         if($spare){
-            return redirect()->route('spare.parts.list')->with('success','New Spare Part created successfully');
+            return redirect()->route('spare.parts.list')->with('success',$message);
 
         }
         else{

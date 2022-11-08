@@ -5,23 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SpareParts extends Model
+class Vehicle extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
-        'vehicle_name',
-        'part_name',
-        'condition',
-        'part_id',
+        'name',
+        'model_name',
+        'color',
+        'fuel_average',
+        'mileage',
+        'features',
+        'discription',
         'phone',
         'price',
         'address',
-        'workshop_name',
-        'img',
-        'dealer_id'
-
+        'image',
+        'dealer_id',
     ];
+
     public function dealer(){
         return $this->belongsTo(User::class);
     }

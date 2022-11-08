@@ -31,6 +31,8 @@ Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
    Route::get('/dealer-add','App\Http\Controllers\SuperAdmin\DealersController@dealerAdd')->name('dealer.add');
    //store dealer
    Route::post('/dealer-store','App\Http\Controllers\SuperAdmin\DealersController@dealerStore')->name('dealer.store'); 
+   
+   
    //spareparts crud
 
    //spareparts list
@@ -44,6 +46,21 @@ Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
 
    //spare parts delete
    Route::post('/spare-parts-delete/{spare}','App\Http\Controllers\SuperAdmin\SparePartsController@sparePartsDelete')->name('spare.parts.delete');
+
+   //vehicle crud
+
+   //vehicle list
+   Route::get('/vehicle-list','App\Http\Controllers\SuperAdmin\VehicleController@vehicleList')->name('vehicle.list');
+
+   //vehicle create or edit
+   Route::get('/vehicle-view/{vehicle?}','App\Http\Controllers\SuperAdmin\VehicleController@vehicleView')->name('vehicle.view');
+  
+   //vehicle store and update
+   Route::post('/vehicle-store','App\Http\Controllers\SuperAdmin\VehicleController@vehicleStore')->name('vehicle.store');
+
+   //vehicle delete
+   Route::post('/vehicle-delete/{vehicle}','App\Http\Controllers\SuperAdmin\VehicleController@vehicleDelete')->name('vehicle.delete');
+
 
 
 });

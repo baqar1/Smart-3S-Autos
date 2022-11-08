@@ -187,6 +187,14 @@
                             <li @if(\Request::route()->getName() == 'spare.parts.view') class="active" @endif><a href="{{route('spare.parts.view')}}">Add New SparePart</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Vehicle </span></a>
+                        <ul @if(\Request::route()->getName() == 'vehicle.list' || \Request::route()->getName() == 'vehicle.view') class="collapse in" aria-expanded="true" @endif>
+                            <li @if(\Request::route()->getName() == 'vehicle.list') class="active" @endif><a href="{{route('vehicle.list')}}">Vehicle List</a></li>
+                            <li @if(\Request::route()->getName() == 'vehicle.view') class="active" @endif><a href="{{route('vehicle.view')}}">Add New Vehicle</a></li>
+                        </ul>
+                    </li>
                  
                     {{-- <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Users </span></a>

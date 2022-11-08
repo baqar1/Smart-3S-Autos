@@ -79,14 +79,31 @@
                                     </div>
     
                                     <div class="row mt-3">
-                                        <div class="col-md-6 col-lg-6">
+                                        <div class="col-md-4 col-lg-4">
+                                            <label  class="form-label">Select Dealer</label>
+                                            <select class="form-control" name="dealer_id" >
+                                                    <option value="">Select</option>
+                                                @foreach ($dealers  as $dealer)
+                                                    @if($spare->exists)
+                                                        <option value="{{$dealer->id}}" {{($dealer->id==$spare->dealer_id)?'selected':''}}>{{$dealer->name}}</option>
+                                                    @else
+                                                        <option value="{{$dealer->id}}">{{$dealer->name}}</option>
+                                                    @endif
+                                                @endforeach
+
+                                            </select>
+                                            @if ($errors->has('dealer_id'))
+                                                <span class="error">{{ $errors->first('dealer_id') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
                                             <label  class="form-label">Workshop Name</label>
                                             <input type="text" name="workshop_name" value="{{old('workshop_name')??$spare->workshop_name}}" class="form-control shadow-sm" aria-label="">
                                             @if ($errors->has('workshop_name'))
                                                 <span class="error">{{ $errors->first('workshop_name') }}</span>
                                             @endif
                                         </div>
-                                        <div class="col-md-6 col-lg-6">
+                                        <div class="col-md-4 col-lg-4">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <label class="form-label">SpareParts Image</label>
                                                 @if($spare->exists)

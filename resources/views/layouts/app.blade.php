@@ -138,10 +138,10 @@
             </div>
 
             <div class="navbar-right">
-                <form id="navbar-search" class="navbar-form search-form">
+                {{-- <form id="navbar-search" class="navbar-form search-form">
                     <input value="" class="form-control" placeholder="Search here..." type="text">
                     <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>
-                </form>
+                </form> --}}
 
                 <div class="dropdown mt-2">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

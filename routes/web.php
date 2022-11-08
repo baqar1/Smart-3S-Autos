@@ -19,6 +19,11 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
     Route::get('/dashboard','App\Http\Controllers\SuperAdmin\DahboardController@index')->name('dashboard');
+    //super admin profile
+    Route::get('/profile/{superadmin}','App\Http\Controllers\SuperAdmin\DahboardController@profile')->name('profile');
+    //super admin profile update
+    Route::post('/profile-update/{superadmin}','App\Http\Controllers\SuperAdmin\DahboardController@profileUpdate')->name('profile.update');
+    //dealer crud
     //get all dealers
     Route::get('/dealer-list','App\Http\Controllers\SuperAdmin\DealersController@dealerList')->name('dealer.list');
     //active or deactive dealers

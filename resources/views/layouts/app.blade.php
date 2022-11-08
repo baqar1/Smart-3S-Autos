@@ -148,7 +148,7 @@
                         {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Profile</a>
+                      <a class="dropdown-item" href="{{route('profile',[ Auth::user()->id])}}">Profile</a>
                       <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
@@ -164,7 +164,7 @@
 
     <div id="left-sidebar" class="sidebar">
         <div class="navbar-brand text-center">
-            <a href="#"><img src="{{asset('assets/images/logo/3S_logo.png')}}" alt="Smart 3S Dealership Logo" class="img-fluid" width="90"></a>
+            <a href="{{route('dashboard')}}"><img src="{{asset('assets/images/logo/3S_logo.png')}}" alt="Smart 3S Dealership Logo" class="img-fluid" width="90"></a>
             <button type="button" class="btn-toggle-offcanvas btn btn-sm btn-default float-right"><i class="lnr lnr-menu fa fa-chevron-circle-left"></i></button>
         </div>
         <div class="sidebar-scroll">

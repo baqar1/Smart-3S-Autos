@@ -86,4 +86,8 @@ class VehicleController extends Controller
         }
 
     }
+    public function vehicleDelete(Vehicle $vehicle){
+        $vehicle->delete();
+        return redirect()->route('vehicle.list')->with('success','Vehicle deleted successfully');
+    }
 }

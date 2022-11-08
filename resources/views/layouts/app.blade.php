@@ -195,6 +195,14 @@
                             <li @if(\Request::route()->getName() == 'vehicle.view') class="active" @endif><a href="{{route('vehicle.view')}}">Add New Vehicle</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Service </span></a>
+                        <ul @if(\Request::route()->getName() == 'service.list' || \Request::route()->getName() == 'service.view') class="collapse in" aria-expanded="true" @endif>
+                            <li @if(\Request::route()->getName() == 'service.list') class="active" @endif><a href="{{route('service.list')}}">Service List</a></li>
+                            <li @if(\Request::route()->getName() == 'service.view') class="active" @endif><a href="{{route('service.view')}}">Add New Service</a></li>
+                        </ul>
+                    </li>
                  
                     {{-- <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Users </span></a>

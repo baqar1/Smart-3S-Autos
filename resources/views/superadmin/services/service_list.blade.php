@@ -13,19 +13,20 @@
                                 </div>
                             </div>
                         </div>
-                        <h2 class="card-title">Vehicle List</h2>
+                        <h2 class="card-title">Service List</h2>
                         <div class="table-responsive">
                             @if(isset($records) && $records->count() > 0)
                             <table class="table table-bordered table-hover js-basic-example dataTable table-custom">
                                 <thead>
                                     <tr>
                                         <th>Sr#</th>
-                                        <th>Vehicle Name</th>
-                                        <th>Model Name</th>
+                                        <th>Service Name</th>
                                         <th>Dealer Name</th>
-                                        <th>Price</th>
-                                        <th>Color</th>
-                                        <th>Phone</th>
+                                        <th>Service Charges</th>
+                                        <th>Vehicle Type</th>
+                                        <th>Vehicle Number</th>
+                                        <th>Service Date</th>
+                                        <th>Service Time</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -34,19 +35,20 @@
                                     @foreach($records as $record)
                                         <tr>
                                             <td>{{$no++}}</td>
-                                            <td>{{ $record->name }}</td>
-                                            <td>{{ $record->model_name }}</td>
+                                            <td>{{ $record->service_name }}</td>
                                             <td>{{$record->dealer->name}}</td>
-                                            <td>{{ $record->price }}</td>
-                                            <td>{{ $record->color }}</td>
-                                            <td>{{ $record->phone }}</td>
+                                            <td>{{ $record->service_charges }}</td>
+                                            <td>{{ $record->vehicle_type }}</td>
+                                            <td>{{ $record->vehicle_number }}</td>
+                                            <td>{{ $record->service_date }}</td>
+                                            <td>{{ $record->service_time }}</td>
                                             <td>
                                                 <div style="display: flex;">
-                                                    <a href="{{route('vehicle.view',[$record->id])}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{route('service.view',[$record->id])}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                                                     &nbsp;
-                                                    <form method="POST" action="{{route('vehicle.delete',[$record->id])}}">
+                                                    <form method="POST" action="{{route('service.delete',[$record->id])}}">
                                                         @csrf
-                                                        <a class="btn btn-primary" href="{{route('vehicle.delete',[$record->id])}}" onclick="event.preventDefault();
+                                                        <a class="btn btn-primary" href="{{route('service.delete',[$record->id])}}" onclick="event.preventDefault();
                                                         this.closest('form').submit();"><i class="fa fa-trash"></i></a>
                                                         
                                                         </form>
@@ -58,18 +60,19 @@
                                 <tfoot>
                                     <tr>
                                         <th>Sr#</th>
-                                        <th>Vehicle Name</th>
-                                        <th>Model Name</th>
+                                        <th>Service Name</th>
                                         <th>Dealer Name</th>
-                                        <th>Price</th>
-                                        <th>Color</th>
-                                        <th>Phone</th>
+                                        <th>Service Charges</th>
+                                        <th>Vehicle Type</th>
+                                        <th>Vehicle Number</th>
+                                        <th>Service Date</th>
+                                        <th>Service Time</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                             </table>
                             @else
-                            {{__("No Vehicles Found")}}
+                            {{__("No Services Found")}}
                             @endif
                         </div>
 

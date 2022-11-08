@@ -67,6 +67,21 @@ Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
    Route::post('/vehicle-delete/{vehicle}','App\Http\Controllers\SuperAdmin\VehicleController@vehicleDelete')->name('vehicle.delete');
 
 
+   //service crud
+
+   //service list
+   Route::get('/service-list','App\Http\Controllers\SuperAdmin\ServiceController@serviceList')->name('service.list');
+
+   //vehicle create or edit
+   Route::get('/service-view/{service?}','App\Http\Controllers\SuperAdmin\ServiceController@serviceView')->name('service.view');
+  
+   //vehicle store and update
+   Route::post('/service-store','App\Http\Controllers\SuperAdmin\ServiceController@serviceStore')->name('service.store');
+
+   //vehicle delete
+   Route::post('/service-delete/{service}','App\Http\Controllers\SuperAdmin\ServiceController@serviceDelete')->name('service.delete');
+
+
 
 });
 

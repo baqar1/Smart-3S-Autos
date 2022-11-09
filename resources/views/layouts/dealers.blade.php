@@ -148,7 +148,7 @@
                         {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="{{route('profile',[ Auth::user()->id])}}">Profile</a>
+                      <a class="dropdown-item" href="{{route('dealers.profile',[ Auth::user()->id])}}">Profile</a>
                       <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
@@ -164,13 +164,13 @@
 
     <div id="left-sidebar" class="sidebar">
         <div class="navbar-brand text-center">
-            <a href="{{route('dashboard')}}"><img src="{{asset('assets/images/logo/3S_logo.png')}}" alt="Smart 3S Dealership Logo" class="img-fluid" width="90"></a>
+            <a href="{{route('dealers.dashboard')}}"><img src="{{asset('assets/images/logo/3S_logo.png')}}" alt="Smart 3S Dealership Logo" class="img-fluid" width="90"></a>
             <button type="button" class="btn-toggle-offcanvas btn btn-sm btn-default float-right"><i class="lnr lnr-menu fa fa-chevron-circle-left"></i></button>
         </div>
         <div class="sidebar-scroll">
             <nav id="left-sidebar-nav" class="sidebar-nav">
                 <ul id="main-menu" class="metismenu">
-                    <li class="active"><a href="{{route('dashboard')}}"><i class="icon-home"></i><span>Dashboard</span></a></li>
+                    <li class="active"><a href="{{route('dealers.dashboard')}}"><i class="icon-home"></i><span>Dashboard</span></a></li>
 
                     <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; SpareParts </span></a>

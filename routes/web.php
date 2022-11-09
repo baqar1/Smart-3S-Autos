@@ -88,6 +88,19 @@ Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
 //dealers route
 Route::group(['prefix'=>'dealers','middleware'=>'auth'],function(){
 
+
+
+    Route::get('/dashboard','App\Http\Controllers\Dealers\DahboardController@index')->name('dealers.dashboard');
+
+    //dealer profile
+    Route::get('/profile/{dealer}','App\Http\Controllers\Dealers\DahboardController@profile')->name('dealers.profile');
+
+    //super admin profile update
+    Route::post('/profile-update/{dealer}','App\Http\Controllers\Dealers\DahboardController@profileUpdate')->name('dealers.profile.update');
+
+
+
+
     //spareparts crud
 
    //spareparts list

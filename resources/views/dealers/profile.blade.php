@@ -1,19 +1,19 @@
-@extends('layouts.app')
+@extends('layouts.dealers')
 @section('content')
 <div class="body">
-    <form method="POST" action="{{ route('profile.update',[$superadmin]) }}">
+    <form method="POST" action="{{ route('dealers.profile.update',[$dealer]) }}">
         @csrf
         <input type="hidden" name="type" value="super-admin">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" value="{{old('name')??$superadmin->name}}">
+            <input type="text" class="form-control" name="name" value="{{old('name')??$dealer->name}}">
             @if ($errors->has('name'))
                 <span class="error">{{ $errors->first('name') }}</span>
             @endif
         </div>
         <div class="form-group">
             <label for="signup-email">Email</label>
-            <input type="email" class="form-control" readonly name="email" value="{{old('email')??$superadmin->email}}">
+            <input type="email" class="form-control" readonly name="email" value="{{old('email')??$dealer->email}}">
             @if ($errors->has('email'))
                 <span class="error">{{ $errors->first('email') }}</span>
             @endif

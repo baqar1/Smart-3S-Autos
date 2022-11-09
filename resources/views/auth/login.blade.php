@@ -9,7 +9,16 @@
     <div style="color: red;font-weight:500;">
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
     </div>
-    
+    @if (session()->has('message'))
+    <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>
+            {!! session()->get('message') !!}
+        </strong>
+    </div>
+@endif
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="form-group">

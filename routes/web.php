@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
+//super admin route
 Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
     Route::get('/dashboard','App\Http\Controllers\SuperAdmin\DahboardController@index')->name('dashboard');
     //super admin profile
@@ -81,8 +83,51 @@ Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
    //vehicle delete
    Route::post('/service-delete/{service}','App\Http\Controllers\SuperAdmin\ServiceController@serviceDelete')->name('service.delete');
 
+});
+
+//dealers route
+Route::group(['prefix'=>'dealers','middleware'=>'auth'],function(){
+
+    //spareparts crud
+
+   //spareparts list
+   Route::get('/spare-parts-list','App\Http\Controllers\Dealers\SparePartsController@sparePartsList')->name('dealers.spare.parts.list');
+
+   //spare parts create or edit
+   Route::get('/spare-parts-view/{spare?}','App\Http\Controllers\Dealers\SparePartsController@sparePartsView')->name('dealers.spare.parts.view');
+  
+   //spareparts store and update
+   Route::post('/spare-parts-store','App\Http\Controllers\Dealers\SparePartsController@sparePartsStore')->name('dealers.spare.parts.store');
+
+   //spare parts delete
+   Route::post('/spare-parts-delete/{spare}','App\Http\Controllers\Dealers\SparePartsController@sparePartsDelete')->name('dealers.spare.parts.delete');
+
+   //vehicle crud
+
+   //vehicle list
+   Route::get('/vehicle-list','App\Http\Controllers\Dealers\VehicleController@vehicleList')->name('dealers.vehicle.list');
+
+   //vehicle create or edit
+   Route::get('/vehicle-view/{vehicle?}','App\Http\Controllers\Dealers\VehicleController@vehicleView')->name('dealers.vehicle.view');
+  
+   //vehicle store and update
+   Route::post('/vehicle-store','App\Http\Controllers\Dealers\VehicleController@vehicleStore')->name('dealers.vehicle.store');
+
+   //vehicle delete
+   Route::post('/vehicle-delete/{vehicle}','App\Http\Controllers\Dealers\VehicleController@vehicleDelete')->name('dealers.vehicle.delete');
 
 
+    //service list
+   Route::get('/service-list','App\Http\Controllers\Dealers\ServiceController@serviceList')->name('dealers.service.list');
+
+   //vehicle create or edit
+   Route::get('/service-view/{service?}','App\Http\Controllers\Dealers\ServiceController@serviceView')->name('dealers.service.view');
+  
+   //vehicle store and update
+   Route::post('/service-store','App\Http\Controllers\Dealers\ServiceController@serviceStore')->name('dealers.service.store');
+
+   //vehicle delete
+   Route::post('/service-delete/{service}','App\Http\Controllers\Dealers\ServiceController@serviceDelete')->name('dealers.service.delete');
 });
 
 // Route::get('/dashboard', function () {

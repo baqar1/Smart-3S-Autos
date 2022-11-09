@@ -6,12 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Validation\Rules;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class DahboardController extends Controller
 {
     public function index(){
-        return view('superadmin.dashboard');
+        if(Auth::user()->type=='super-admin'){
+            return view('superadmin.dashboard');
+        }
+        else{
+            if(Auth::user()->status=='0'){
+                return redirect()->back()->with('message','Dealer not active');
+            }
+            else{
+                return view('dealers.dashboard');
+            }
+            
+        }
+        
     }
     public function profile(User $superadmin){
         return view('superadmin.profile',compact('superadmin'));

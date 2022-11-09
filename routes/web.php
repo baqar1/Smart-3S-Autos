@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 
 //super admin route
-Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
+Route::group(['prefix'=>'super-admin','middleware'=>['auth','isSuperAdmin'] ],function(){
     Route::get('/dashboard','App\Http\Controllers\SuperAdmin\DahboardController@index')->name('dashboard');
     //super admin profile
     Route::get('/profile/{superadmin}','App\Http\Controllers\SuperAdmin\DahboardController@profile')->name('profile');
@@ -86,7 +86,7 @@ Route::group(['prefix'=>'super-admin','middleware'=>'auth'],function(){
 });
 
 //dealers route
-Route::group(['prefix'=>'dealers','middleware'=>'auth'],function(){
+Route::group(['prefix'=>'dealers','middleware'=>['auth','isActive'] ],function(){
 
 
 

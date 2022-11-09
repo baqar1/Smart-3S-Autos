@@ -12,23 +12,24 @@ use Illuminate\Support\Facades\Hash;
 class DahboardController extends Controller
 {
     public function index(Request $request){
-        if(Auth::user()->type=='super-admin'){
-            return view('superadmin.dashboard');
-        }
-        else{
-            if(Auth::user()->status=='0'){
-                Auth::guard('web')->logout();
+        return view('superadmin.dashboard');
+        // if(Auth::user()->type=='super-admin'){
+        //     return view('superadmin.dashboard');
+        // }
+        // else{
+        //     if(Auth::user()->status=='0'){
+        //         Auth::guard('web')->logout();
 
-                $request->session()->invalidate();
+        //         $request->session()->invalidate();
 
-                $request->session()->regenerateToken();
-                return redirect()->back()->with('message','Dealer not active');
-            }
-            else{
-                return view('dealers.dashboard');
-            }
+        //         $request->session()->regenerateToken();
+        //         return redirect()->back()->with('message','Dealer not active');
+        //     }
+        //     else{
+        //         return view('dealers.dashboard');
+        //     }
             
-        }
+        // }
         
     }
     public function profile(User $superadmin){

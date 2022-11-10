@@ -173,6 +173,14 @@
                     <li class="active"><a href="{{route('dealers.dashboard')}}"><i class="icon-home"></i><span>Dashboard</span></a></li>
 
                     <li>
+                        <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Selling Vehicle </span></a>
+                        <ul @if(\Request::route()->getName() == 'dealers.vehicle.list' || \Request::route()->getName() == 'dealers.vehicle.view') class="collapse in" aria-expanded="true" @endif>
+                            <li @if(\Request::route()->getName() == 'dealers.vehicle.list') class="active" @endif><a href="{{route('dealers.vehicle.list')}}">Vehicle List</a></li>
+                            <li @if(\Request::route()->getName() == 'dealers.vehicle.view') class="active" @endif><a href="{{route('dealers.vehicle.view')}}">Add New Vehicle</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; SpareParts </span></a>
                         <ul @if(\Request::route()->getName() == 'dealers.spare.parts.list' || \Request::route()->getName() == 'dealers.spare.parts.view') class="collapse in" aria-expanded="true" @endif>
                             <li @if(\Request::route()->getName() == 'dealers.spare.parts.list') class="active" @endif><a href="{{route('dealers.spare.parts.list')}}">SpareParts List</a></li>
@@ -180,13 +188,7 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Vehicle </span></a>
-                        <ul @if(\Request::route()->getName() == 'dealers.vehicle.list' || \Request::route()->getName() == 'dealers.vehicle.view') class="collapse in" aria-expanded="true" @endif>
-                            <li @if(\Request::route()->getName() == 'dealers.vehicle.list') class="active" @endif><a href="{{route('dealers.vehicle.list')}}">Vehicle List</a></li>
-                            <li @if(\Request::route()->getName() == 'dealers.vehicle.view') class="active" @endif><a href="{{route('dealers.vehicle.view')}}">Add New Vehicle</a></li>
-                        </ul>
-                    </li>
+                    
 
                     <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Service </span></a>

@@ -22,14 +22,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register-user', 'App\Http\Controllers\Api\AuthenticateController@register');
 Route::post('login-user', 'App\Http\Controllers\Api\AuthenticateController@login');
 
-//get all dealers
-Route::post('dealers','App\Http\Controllers\Api\DashboardController@dealers');
-//get all dealers
-Route::post('services','App\Http\Controllers\Api\DashboardController@services');
-//get all dealers
-Route::post('spare-parts','App\Http\Controllers\Api\DashboardController@spareParts');
+
 
 Route::group(['middleware'=>'auth:sanctum'], function () {
     Route::post('/dashboard','App\Http\Controllers\Api\DashboardController@index');
+    //get all dealers
+    Route::post('dealers','App\Http\Controllers\Api\DashboardController@getDealers');
+    //get all vehicles
+    Route::post('vehicles','App\Http\Controllers\Api\DashboardController@getVehicles');
+
+    //get all services
+    Route::post('services','App\Http\Controllers\Api\DashboardController@getServices');
+    //get all spareparts
+    Route::post('spare-parts','App\Http\Controllers\Api\DashboardController@getSpareParts');
 
 });

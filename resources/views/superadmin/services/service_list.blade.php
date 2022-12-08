@@ -37,7 +37,7 @@
                                             <td>{{$no++}}</td>
                                             <td>{{ $record->service_name }}</td>
                                             <td>{{$record->dealer->name}}</td>
-                                            <td>{{ $record->service_charges }}</td>
+                                            <td>{{ $record->price }}</td>
                                             <td>{{ $record->vehicle_type }}</td>
                                             <td>{{ $record->vehicle_number }}</td>
                                             <td>{{ $record->service_date }}</td>

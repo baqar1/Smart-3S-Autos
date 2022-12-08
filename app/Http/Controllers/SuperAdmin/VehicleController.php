@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Smart;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -10,11 +11,11 @@ use Illuminate\Http\Request;
 class VehicleController extends Controller
 {
     public function vehicleList(){
-        $records = Vehicle::with('dealer')->get();
+        $records = Smart::with('dealer')->where('type',3)->get();
         return view('superadmin.vehicles.vehicle_list',compact('records'));
     }
 
-    public function vehicleView(Vehicle $vehicle){
+    public function vehicleView(Smart $vehicle){
         $dealers = User::where('type','dealer')->where('status','1')->get();
         return view('superadmin.vehicles.vehicle_view',compact('vehicle','dealers'));
     }
@@ -27,17 +28,17 @@ class VehicleController extends Controller
         }
        
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'model_name' => ['required', 'string', 'max:255'],
+            'vehicle_name' => ['required', 'string', 'max:255'],
+            'vehicle_model' => ['required', 'string', 'max:255'],
             'color' => ['required', 'string', 'max:255'],
             'fuel_average' => ['required', 'string', 'max:255'],
             'mileage' => ['required', 'string', 'max:30'],
             'features' => ['required', 'string', 'max:255'],
-            'discription' => ['required', 'string'],
+            'vehicle_description' => ['required', 'string'],
             'phone' => ['required', 'string', 'max:255'],
             'price' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'image' => ['mimes:jpeg,jpg,png,gif',$imageValidation],
+            //'image' => ['mimes:jpeg,jpg,png,gif',$imageValidation],
             'dealer_id'=>['required']    
         ]);
         $message = '';
@@ -49,7 +50,7 @@ class VehicleController extends Controller
         }
         else{
             if($request->id){
-                $vehicle = Vehicle::find($request->id);
+                $vehicle = Smart::find($request->id);
                 $imageName = $vehicle->image;
                 $message = 'Vehicle updated successfully';
             }
@@ -59,21 +60,22 @@ class VehicleController extends Controller
             }
 
         }
-        $vehicle = Vehicle::updateOrCreate(
+        $vehicle = Smart::updateOrCreate(
             ['id'=>$request->id],
             [
-                'name' => $request->name,
-                'model_name' => $request->model_name,
+                'vehicle_name' => $request->vehicle_name,
+                'vehicle_model' => $request->vehicle_model,
                 'color' => $request->color,
                 'fuel_average' => $request->fuel_average,
                 'mileage' => $request->mileage,
                 'features' => $request->features,
-                'discription' => $request->discription,
+                'vehicle_description' => $request->vehicle_description,
                 'phone' => $request->phone,
                 'price' => $request->price,
                 'address' => $request->address,
-                'image' => $imageName,
+                'image_id' => $imageName,
                 'dealer_id'=>$request->dealer_id,
+                'type'=>3
             ]
         );
 
@@ -86,7 +88,7 @@ class VehicleController extends Controller
         }
 
     }
-    public function vehicleDelete(Vehicle $vehicle){
+    public function vehicleDelete(Smart $vehicle){
         $vehicle->delete();
         return redirect()->route('vehicle.list')->with('success','Vehicle deleted successfully');
     }

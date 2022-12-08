@@ -22,16 +22,16 @@
                                         
                                         <div class="col-md-4 col-lg-4">
                                             <label class="form-label">Vehicle Name</label>
-                                            <input type="text" name="name" value="{{old('name')??$vehicle->name}}" class="form-control shadow-sm" aria-label="">
-                                            @if ($errors->has('name'))
-                                                <span class="error">{{ $errors->first('name') }}</span>
+                                            <input type="text" name="vehicle_name" value="{{old('vehicle_name')??$vehicle->vehicle_name}}" class="form-control shadow-sm" aria-label="">
+                                            @if ($errors->has('vehicle_name'))
+                                                <span class="error">{{ $errors->first('vehicle_name') }}</span>
                                             @endif
                                         </div>
                                         <div class="col-md-4 col-lg-4">
                                             <label class="form-label">Model Name</label>
-                                            <input type="text" name="model_name" value="{{old('model_name')??$vehicle->model_name}}" class="form-control shadow-sm" aria-label="">
-                                            @if ($errors->has('model_name'))
-                                                <span class="error">{{ $errors->first('model_name') }}</span>
+                                            <input type="text" name="vehicle_model" value="{{old('vehicle_model')??$vehicle->vehicle_model}}" class="form-control shadow-sm" aria-label="">
+                                            @if ($errors->has('vehicle_model'))
+                                                <span class="error">{{ $errors->first('vehicle_model') }}</span>
                                             @endif
                                         </div>
                                         <div class="col-md-4 col-lg-4">
@@ -130,9 +130,9 @@
                                     <div class="row mt-3">
                                         <div class="col-md-12 col-lg-12">
                                             <label  class="form-label">Description</label>
-                                            <textarea class="form-control" name="discription" cols="30" rows="10">{{old('discription')??$vehicle->discription}}</textarea>
-                                            @if ($errors->has('discription'))
-                                                <span class="error">{{ $errors->first('discription') }}</span>
+                                            <textarea class="form-control" name="vehicle_description" cols="30" rows="10">{{old('vehicle_description')??$vehicle->vehicle_description}}</textarea>
+                                            @if ($errors->has('vehicle_description'))
+                                                <span class="error">{{ $errors->first('vehicle_description') }}</span>
                                             @endif
                                         </div>
                                         

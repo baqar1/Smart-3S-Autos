@@ -13,56 +13,24 @@
         @endif
 
         <h1>All Orders</h1>
-        <table id="order_list" class="table table-hover" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Sr.No</th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Order Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php $no = 1; @endphp
-                @foreach ($orders as $order )
-                @if($order->smart!=null)
-                    <tr>
-                        <td>{{$no++}}</td>
-                        
-                            @if($order->smart->type==1)
-                            <td>{{$order->smart->service_name}}</td>
-                            @elseif($order->smart->type==2)
-                            <td>{{$order->smart->part_name}}</td>
-                            @elseif($order->smart->type==3)
-                            <td>{{$order->smart->vehicle_name}}</td>
-                            @endif
-                        
-                        
-                        
-                        <td>{{$order->price}}</td>
-                        <td>
-                            @if($order->order_status==2)
-                                <select class="form-control" disabled>
-                                    
-                                    <option value="2" {{$order->order_status==2?'selected':''}}>Completed</option>
-                                    
-                                </select>
-
-                            @else
-                                <select name="order_status" id="order_status" data-id="{{$order->id}}" class="form-control">
-                                    <option value="1" {{$order->order_status==1?'selected':''}}>Pending</option>
-                                    <option value="2" {{$order->order_status==2?'selected':''}}>Completed</option>
-                                    <option value="3" {{$order->order_status==3?'selected':''}}>Approval</option>
-                                </select>
-                            @endif
-                            
-                        </td>
-                    </tr>
-                    @endif
-                @endforeach
-                
-            </tbody>
-        </table>
+        <div class="row mb-4">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h4>Filter Order Status</h4>
+                <select class="form-control" name="filter_status" id="filter_status">
+                    <option value="">All</option>
+                    <option value="1">Pending</option>
+                    <option value="2">Completed</option>
+                    <option value="3">Approval</option>
+                </select>
+            </div>
+           
+            <div class="col-md-4"></div>
+        </div>
+        <div id="table_render">
+            @include('layouts.partial')
+        </div>
+        
     @endsection
     @section('scripts')
     <script>
@@ -90,6 +58,22 @@
                     else{
                         toastr.danger('Something went wrong');
                     }
+                }
+            });
+        });
+
+        //onchange filter status
+        $(document).on('change','#filter_status',function(){
+            var value = $(this).val();
+            $.ajax({
+                url: "{{route('orders.filter')}}",
+                data: {value:value},
+                success:function(response){
+                    if(response.status==true){
+                        toastr.success(response.message);
+                        $('#table_render').html(response.orders);
+                    }
+                    
                 }
             });
         });

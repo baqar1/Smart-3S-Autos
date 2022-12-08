@@ -34,8 +34,8 @@
                                     @foreach($records as $record)
                                         <tr>
                                             <td>{{$no++}}</td>
-                                            <td>{{ $record->name }}</td>
-                                            <td>{{ $record->model_name }}</td>
+                                            <td>{{ $record->vehicle_name }}</td>
+                                            <td>{{ $record->vehicle_model }}</td>
                                             <td>{{$record->dealer->name}}</td>
                                             <td>{{ $record->price }}</td>
                                             <td>{{ $record->color }}</td>

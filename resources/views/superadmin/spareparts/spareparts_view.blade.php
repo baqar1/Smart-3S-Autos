@@ -36,9 +36,9 @@
                                         </div>
                                         <div class="col-md-4 col-lg-4">
                                             <label class="form-label">Condition</label>
-                                            <input type="text" name="condition" value="{{old('condition')??$spare->condition}}" class="form-control shadow-sm" aria-label="">
-                                            @if ($errors->has('condition'))
-                                                <span class="error">{{ $errors->first('condition') }}</span>
+                                            <input type="text" name="part_condition" value="{{old('part_condition')??$spare->part_condition}}" class="form-control shadow-sm" aria-label="">
+                                            @if ($errors->has('part_condition'))
+                                                <span class="error">{{ $errors->first('part_condition') }}</span>
                                             @endif
                                         </div>
                                         

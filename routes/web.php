@@ -41,6 +41,8 @@ Route::group(['prefix'=>'super-admin','middleware'=>['auth','isSuperAdmin'] ],fu
 
    //orders routes
    Route::get('orders-list','App\Http\Controllers\SuperAdmin\OrderController@ordersList')->name('orders.list');
+   //filter order
+   Route::get('orders-filter','App\Http\Controllers\SuperAdmin\OrderController@ordersFilter')->name('orders.filter');
    //order status
    Route::get('orders-status','App\Http\Controllers\SuperAdmin\OrderController@orderStatus')->name('order.status');
 

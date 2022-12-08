@@ -14,10 +14,25 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function ordersList(){
-        $orders = Order::with('smart')->get();
-        //dd($orders);
+    public function ordersList(Request $request){
+        $orders = Order::with('smart','dealer')->get();
         return view('orders_list')->with('orders',$orders);
+    }
+
+    public function ordersFilter(Request $request){
+        $orders = Order::with('smart','dealer');
+        if($request->value!=''){
+            
+            $orders = $orders->where('order_status',$request->value);
+        }
+        $orders = $orders->get();
+        $html = view('layouts.partial',['orders'=>$orders])->render();
+        return response()->json([
+            'status'=>true,
+            'message'=>'filter changed successfully',
+            'orders'=>$html
+        ]);
+
     }
 
     public function getAllOrders(){

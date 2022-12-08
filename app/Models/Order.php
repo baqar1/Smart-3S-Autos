@@ -14,4 +14,7 @@ class Order extends Model
     public function smart(){
         return $this->belongsTo(Smart::class,'smart_id','id');
     }
+    public function dealer(){
+        return $this->belongsTo(User::class,'dealer_id','id');
+    }
 }

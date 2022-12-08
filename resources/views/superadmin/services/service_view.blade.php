@@ -29,9 +29,9 @@
                                         </div>
                                         <div class="col-md-2 col-lg-2">
                                             <label class="form-label">Service Charges</label>
-                                            <input type="text" name="service_charges" value="{{old('service_charges')??$service->service_charges}}" class="form-control shadow-sm" aria-label="">
-                                            @if ($errors->has('service_charges'))
-                                                <span class="error">{{ $errors->first('service_charges') }}</span>
+                                            <input type="text" name="price" value="{{old('price')??$service->price}}" class="form-control shadow-sm" aria-label="">
+                                            @if ($errors->has('price'))
+                                                <span class="error">{{ $errors->first('price') }}</span>
                                             @endif
                                         </div>
                                         <div class="col-md-3 col-lg-3">

@@ -65,7 +65,7 @@ class SparePartsController extends Controller
                 'price'=>$request->price,
                 'address'=>$request->address,
                 'workshop_name'=>$request->workshop_name,
-                'img'=>$imageName,
+                //'img'=>$imageName,
                 'dealer_id'=>$request->dealer_id,
                 'type'=>2
             ]

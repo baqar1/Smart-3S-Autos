@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\Smart;
 use App\Models\SpareParts;
 use App\Models\User;
 use App\Models\Vehicle;
@@ -23,7 +24,7 @@ class DashboardController extends Controller
     }
 
     public function getVehicles(){
-        $vehicles = Vehicle::latest()->get();
+        $vehicles = Smart::where('type',3)->latest()->get();
         return response()->json([
             'status'=>true,
             'vehicles'=>$vehicles,
@@ -31,14 +32,14 @@ class DashboardController extends Controller
     }
 
     public function getServices(){
-        $services = Service::latest()->get();
+        $services = Smart::where('type',1)->latest()->get();
         return response()->json([
             'status'=>true,
             'services'=>$services,
         ]);
     }
     public function getSpareParts(){
-        $spareParts = SpareParts::latest()->get();
+        $spareParts = Smart::where('type',2)->latest()->get();
         return response()->json([
             'status'=>true,
             'spareParts'=>$spareParts,

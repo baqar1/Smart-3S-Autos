@@ -38,6 +38,15 @@ Route::group(['prefix'=>'super-admin','middleware'=>['auth','isSuperAdmin'] ],fu
    Route::get('/dealer-add','App\Http\Controllers\SuperAdmin\DealersController@dealerAdd')->name('dealer.add');
    //store dealer
    Route::post('/dealer-store','App\Http\Controllers\SuperAdmin\DealersController@dealerStore')->name('dealer.store'); 
+
+   //orders routes
+   Route::get('orders-list','App\Http\Controllers\SuperAdmin\OrderController@ordersList')->name('orders.list');
+   //order status
+   Route::get('orders-status','App\Http\Controllers\SuperAdmin\OrderController@orderStatus')->name('order.status');
+
+   //admin setting
+   Route::get('show-admin-setting','App\Http\Controllers\SuperAdmin\DahboardController@showAdminSetting')->name('show.admin.setting');
+   Route::post('update-admin-setting','App\Http\Controllers\SuperAdmin\DahboardController@updateAdminSetting')->name('update.admin.setting');
    
    
    //spareparts crud

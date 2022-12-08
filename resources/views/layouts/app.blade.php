@@ -171,6 +171,24 @@
             <nav id="left-sidebar-nav" class="sidebar-nav">
                 <ul id="main-menu" class="metismenu">
                     <li class="active"><a href="{{route('dashboard')}}"><i class="icon-home"></i><span>Dashboard</span></a></li>
+                    <li>
+                        <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Dealers Management </span></a>
+                        <ul @if(\Request::route()->getName() == 'dealers_list' || \Request::route()->getName() == 'add_dealer') class="collapse in" aria-expanded="true" @endif>
+                            <li @if(\Request::route()->getName() == 'dealer.list') class="active" @endif><a href="{{route('dealer.list')}}">All Dealers</a></li>
+                            <li @if(\Request::route()->getName() == 'dealer.add') class="active" @endif><a href="{{route('dealer.add')}}">Add New Dealers</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Orders Management </span></a>
+                        <ul @if(\Request::route()->getName() == 'orders.list' || \Request::route()->getName() == 'add_dealer') class="collapse in" aria-expanded="true" @endif>
+                            <li @if(\Request::route()->getName() == 'orders.list') class="active" @endif><a href="{{route('orders.list')}}">All Orders</a></li>
+                        </ul>
+                    </li>
+
+
+
 
                     <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Selling Vehicle </span></a>
@@ -180,13 +198,7 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Dealers Management </span></a>
-                        <ul @if(\Request::route()->getName() == 'dealers_list' || \Request::route()->getName() == 'add_dealer') class="collapse in" aria-expanded="true" @endif>
-                            <li @if(\Request::route()->getName() == 'dealer.list') class="active" @endif><a href="{{route('dealer.list')}}">All Dealers</a></li>
-                            <li @if(\Request::route()->getName() == 'dealer.add') class="active" @endif><a href="{{route('dealer.add')}}">Add New Dealers</a></li>
-                        </ul>
-                    </li>
+                    
 
                     <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; SpareParts </span></a>
@@ -203,6 +215,11 @@
                             <li @if(\Request::route()->getName() == 'service.view') class="active" @endif><a href="{{route('service.view')}}">Add New Service</a></li>
                         </ul>
                     </li>
+
+                    <li @if(\Request::route()->getName() == 'show.admin.setting') class="active" @endif><a href="{{route('show.admin.setting')}}"><i class="fa fa-file-text"></i><span>Admin Setting</span></a></li>
+
+
+                   
                  
                     {{-- <li>
                         <a href="#forms" class="has-arrow mb-1"><i class="fa fa-users"></i><span>&nbsp; Users </span></a>

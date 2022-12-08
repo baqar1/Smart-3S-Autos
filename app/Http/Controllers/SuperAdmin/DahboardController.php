@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminSetting;
 use App\Models\User;
 use Illuminate\Validation\Rules;
 use Illuminate\Http\Request;
@@ -46,5 +47,31 @@ class DahboardController extends Controller
             'password'=>Hash::make($request->password)
         ]);
         return redirect()->route('dashboard')->with('success','Profile updated successfully');
+    }
+
+    public function showAdminSetting(){
+        $setting = AdminSetting::first();
+        return view('superadmin.setting', compact('setting'));
+    }
+    public function updateAdminSetting(Request $request){
+        $request->validate([
+            'service_commision' => 'numeric|between:0,99.99',
+            'spareparts_commision' => 'numeric|between:0,99.99',
+            'vehicles_commision' => 'numeric|between:0,99.99',
+        ]);
+        if(Auth::user()->type=='super-admin'){
+            $admin = AdminSetting::first();
+            $admin->update([
+                'service_commision'=>$request->service_commision,
+                'spareparts_commision'=>$request->spareparts_commision,
+                'vehicles_commision'=>$request->vehicles_commision,
+
+            ]);
+            return redirect()->route('show.admin.setting')->with('success','Setting updated successfully');
+
+        }
+        else{
+            return redirect()->route('show.admin.setting')->with('error','You have no permission to update');
+        }
     }
 }

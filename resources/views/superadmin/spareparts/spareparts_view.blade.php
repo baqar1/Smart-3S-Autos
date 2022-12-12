@@ -103,15 +103,6 @@
                                                 <span class="error">{{ $errors->first('workshop_name') }}</span>
                                             @endif
                                         </div>
-                                        <div class="col-md-4 col-lg-4">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <label class="form-label">SpareParts Image</label>
-                                                @if($spare->exists)
-                                                <img src="{{asset('images/')}}/{{$spare->img}}" class="img-fluid" width="150">
-                                                @endif
-                                            </div>
-                                            <input class="form-control shadow-sm" type="file" name="img">
-                                        </div>
                                     </div>
     
                                 </div>
@@ -119,6 +110,14 @@
                             </div>
 
                         </form>
+                        @if($spare->exists)
+                        <div class="row mt-3">
+                            <div class="col-md-12 col-lg-12">
+                                @include('components.image')
+                            </div>
+
+                        </div>
+                        @endif
                         
                         
 

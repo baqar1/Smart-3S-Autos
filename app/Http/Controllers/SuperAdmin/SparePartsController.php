@@ -9,6 +9,8 @@ use App\Models\SpareParts;
 use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HelperController;
+use App\Models\SmartImage;
 
 class SparePartsController extends Controller
 {
@@ -30,23 +32,16 @@ class SparePartsController extends Controller
 
         $message = '';
         
-        if($request->img){
-            $imageName = time().'.'.$request->img->extension();  
-     
-            $request->img->move(public_path('images'), $imageName);
-        }
-        else{
+        
             if($request->id){
-                $spare = Smart::find($request->id);
-                $imageName = $spare->img;
+                //$spareImages = SmartImage::where('image_id',$request->id)->get();
                 $message = 'Spare Part updated successfully';
             }
             else{
-                $imageName = null;
                 $message = 'New Spare Part created successfully';
             }
 
-        }
+        
         
         
         if($spare){

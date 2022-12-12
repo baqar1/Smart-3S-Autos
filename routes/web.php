@@ -93,6 +93,9 @@ Route::group(['prefix'=>'super-admin','middleware'=>['auth','isSuperAdmin'] ],fu
 
    //vehicle delete
    Route::post('/service-delete/{service}','App\Http\Controllers\SuperAdmin\ServiceController@serviceDelete')->name('service.delete');
+   //upload images
+   Route::post('/upload-image','App\Http\Controllers\HelperController@uploadImage')->name('upload.image');  
+   Route::post('/delete-image','App\Http\Controllers\HelperController@deleteImage')->name('delete.image');   
 
 });
 

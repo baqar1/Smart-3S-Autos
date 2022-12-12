@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SpareStoreRequest;
 use App\Models\Smart;
 use App\Models\SpareParts;
 use App\Models\User;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class SparePartsController extends Controller
@@ -20,20 +22,12 @@ class SparePartsController extends Controller
         return view('superadmin.spareparts.spareparts_view',compact('spare','dealers'));
     }
 
-    public function sparePartsStore(Request $request){
-        $request->validate([
-            'vehicle_name' => ['required', 'string', 'max:255'],
-            'part_name' => ['required', 'string', 'max:255'],
-            'part_condition' => ['required', 'string', 'max:255'],
-            'part_id' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:30'],
-            'price' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'workshop_name' => ['required', 'string', 'max:255'],
-            //'img' => ['mimes:jpeg,jpg,png,gif'],
-            'dealer_id'=>['required']
-            
-        ]);
+    public function sparePartsStore(SpareStoreRequest $request,Smart $smart){
+        
+        $validated = $request->validated();
+        
+        $spare = $smart->saveSpareParts($validated);
+
         $message = '';
         
         if($request->img){
@@ -54,22 +48,7 @@ class SparePartsController extends Controller
 
         }
         
-        $spare = Smart::updateOrCreate(
-            ['id'=>$request->id],
-            [
-                'vehicle_name'=>$request->vehicle_name,
-                'part_name'=>$request->part_name,
-                'part_condition'=>$request->part_condition,
-                'part_id'=>$request->part_id,
-                'phone'=>$request->phone,
-                'price'=>$request->price,
-                'address'=>$request->address,
-                'workshop_name'=>$request->workshop_name,
-                //'img'=>$imageName,
-                'dealer_id'=>$request->dealer_id,
-                'type'=>2
-            ]
-        );
+        
         if($spare){
             return redirect()->route('spare.parts.list')->with('success',$message);
 

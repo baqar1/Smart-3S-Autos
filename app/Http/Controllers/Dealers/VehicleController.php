@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dealers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VehicleStoreRequest;
 use App\Models\Smart;
 use App\Models\User;
 use App\Models\Vehicle;
@@ -20,7 +21,11 @@ class VehicleController extends Controller
         $dealers = User::where('type','dealer')->where('status','1')->get();
         return view('dealers.vehicles.vehicle_view',compact('vehicle','dealers'));
     }
-    public function vehicleStore(Request $request){
+    public function vehicleStore(VehicleStoreRequest $request, Smart $smart){
+        $validated = $request->validated();
+        
+        $vehicle = $smart->saveVehicle($validated);
+
         if($request->id){
             $imageValidation = ($request->image==null)? '':'required';
         }
@@ -28,20 +33,7 @@ class VehicleController extends Controller
             $imageValidation = 'required'; 
         }
        
-        $request->validate([
-            'vehicle_name' => ['required', 'string', 'max:255'],
-            'vehicle_model' => ['required', 'string', 'max:255'],
-            'color' => ['required', 'string', 'max:255'],
-            'fuel_average' => ['required', 'string', 'max:255'],
-            'mileage' => ['required', 'string', 'max:30'],
-            'features' => ['required', 'string', 'max:255'],
-            'vehicle_description' => ['required', 'string'],
-            'phone' => ['required', 'string', 'max:255'],
-            'price' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            //'image' => ['mimes:jpeg,jpg,png,gif',$imageValidation],
-            'dealer_id'=>['required']    
-        ]);
+      
         $message = '';
         
         if($request->image){
@@ -61,24 +53,7 @@ class VehicleController extends Controller
             }
 
         }
-        $vehicle = Smart::updateOrCreate(
-            ['id'=>$request->id],
-            [
-                'vehicle_name' => $request->vehicle_name,
-                'vehicle_model' => $request->vehicle_model,
-                'color' => $request->color,
-                'fuel_average' => $request->fuel_average,
-                'mileage' => $request->mileage,
-                'features' => $request->features,
-                'vehicle_description' => $request->vehicle_description,
-                'phone' => $request->phone,
-                'price' => $request->price,
-                'address' => $request->address,
-                'image_id' => $imageName,
-                'dealer_id'=>$request->dealer_id,
-                'type'=>3
-            ]
-        );
+      
 
         if($vehicle){
             return redirect()->route('dealers.vehicle.list')->with('success',$message);

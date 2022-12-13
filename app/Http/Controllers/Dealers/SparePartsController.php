@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dealers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SpareStoreRequest;
 use App\Models\Smart;
+use App\Models\SmartImage;
 use App\Models\SpareParts;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class SparePartsController extends Controller
 
     public function sparePartsView(Smart $spare){
         $dealers = User::where('type','dealer')->where('status','1')->get();
-        return view('dealers.spareparts.spareparts_view',compact('spare','dealers'));
+        $imageCount = SmartImage::where('image_id',$spare->id)->count();
+        return view('dealers.spareparts.spareparts_view',compact('spare','dealers','imageCount'));
     }
 
     public function sparePartsStore(SpareStoreRequest $request,Smart $smart){
@@ -30,23 +32,22 @@ class SparePartsController extends Controller
 
         $message = '';
         
-        if($request->img){
-            $imageName = time().'.'.$request->img->extension();  
-     
-            $request->img->move(public_path('images'), $imageName);
-        }
-        else{
+        
             if($request->id){
-                $spare = Smart::find($request->id);
-                $imageName = $spare->img;
-                $message = 'Spare Part updated successfully';
+                $imageCount = SmartImage::where('image_id',$request->id)->count();
+                if($imageCount <= 0){
+                    $spare->update(['status'=>0]);
+                    return redirect()->back()->with('error','You must upload image to publish this spareparts');
+                }
+                $spare->update(['status'=>1]);
+                $message = 'Spare Part updated successfully'; 
             }
             else{
-                $imageName = null;
-                $message = 'New Spare Part created successfully';
+                $message = 'New Spare Part created successfully, but must upload images to publish';
+                return redirect(route('dealers.spareparts.spareparts_view',[$spare->id]))->with('success',$message);
             }
 
-        }
+        
         
         if($spare){
             return redirect()->route('dealers.spare.parts.list')->with('success',$message);

@@ -93,10 +93,7 @@ Route::group(['prefix'=>'super-admin','middleware'=>['auth','isSuperAdmin'] ],fu
 
    //vehicle delete
    Route::post('/service-delete/{service}','App\Http\Controllers\SuperAdmin\ServiceController@serviceDelete')->name('service.delete');
-   //upload images
-   Route::post('/upload-image','App\Http\Controllers\HelperController@uploadImage')->name('upload.image');  
-   Route::post('/delete-image','App\Http\Controllers\HelperController@deleteImage')->name('delete.image');   
-
+      
 });
 
 //dealers route
@@ -155,6 +152,15 @@ Route::group(['prefix'=>'dealers','middleware'=>['auth','isActive'] ],function()
 
    //vehicle delete
    Route::post('/service-delete/{service}','App\Http\Controllers\Dealers\ServiceController@serviceDelete')->name('dealers.service.delete');
+});
+
+
+//common route
+Route::group(['middleware'=>'auth'],function(){
+    //upload images
+   Route::post('/upload-image','App\Http\Controllers\HelperController@uploadImage')->name('upload.image');  
+   Route::post('/delete-image','App\Http\Controllers\HelperController@deleteImage')->name('delete.image');
+
 });
 
 // Route::get('/dashboard', function () {

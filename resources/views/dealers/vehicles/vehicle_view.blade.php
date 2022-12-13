@@ -13,6 +13,9 @@
                         <div class="form-group">
                             <h4 class="text-light bg-dark" style="text-align: center; padding: 10px; margin-top: 5px;"> @if($vehicle->exists) Edit Vehicle @else Add New Vehicle @endif</h4>
                         </div>
+                        @if ($vehicle->exists && $imageCount<= 0)
+                        <h5 class="error" style="text-align: center; padding: 10px; margin-top: 5px;">You must upload image to publish this Vehicle</h5>
+                        @endif
                         <form action="{{route('dealers.vehicle.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id" value="{{$vehicle->id??''}}">
@@ -97,18 +100,7 @@
                                                 <span class="error">{{ $errors->first('address') }}</span>
                                             @endif
                                         </div>
-                                        <div class="col-md-6 col-lg-6">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <label class="form-label">Vehicle Image</label>
-                                                @if($vehicle->exists)
-                                                <img src="{{asset('images/')}}/{{$vehicle->image}}" class="img-fluid" width="150">
-                                                @endif
-                                            </div>
-                                            <input class="form-control shadow-sm" type="file" name="image">
-                                            @if ($errors->has('image'))
-                                                <span class="error">{{ $errors->first('image') }}</span>
-                                            @endif
-                                        </div>
+                                        
                                         
                                     </div>
 
@@ -129,6 +121,14 @@
                             </div>
 
                         </form>
+                        @if($vehicle->exists)
+                        <div class="row mt-3">
+                            <div class="col-md-12 col-lg-12">
+                                @include('components.image',['smart_id'=>$vehicle->id])
+                            </div>
+
+                        </div>
+                        @endif
                         
                         
 

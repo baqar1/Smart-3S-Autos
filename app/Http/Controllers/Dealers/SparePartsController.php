@@ -44,11 +44,9 @@ class SparePartsController extends Controller
             }
             else{
                 $message = 'New Spare Part created successfully, but must upload images to publish';
-                return redirect(route('dealers.spareparts.spareparts_view',[$spare->id]))->with('success',$message);
+                return redirect(route('dealers.spare.parts.view',[$spare->id]))->with('success',$message);
             }
 
-        
-        
         if($spare){
             return redirect()->route('dealers.spare.parts.list')->with('success',$message);
 
@@ -60,6 +58,7 @@ class SparePartsController extends Controller
 
     public function sparePartsDelete(Smart $spare){
         $spare->delete();
+        SmartImage::where('image_id',$spare->id)->delete();
         return redirect()->route('dealers.spare.parts.list')->with('success','Spare Part deleted successfully');
     }
 }

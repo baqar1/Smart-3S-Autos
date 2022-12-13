@@ -10,10 +10,10 @@
     <h3>Upload Images</h3>
     <form method="post" action="{{route('upload.image')}}" enctype="multipart/form-data" 
                   class="dropzone" id="dropzone">
-        <input type="hidden" name="image_id" value="{{$spare->id}}">
+        <input type="hidden" name="image_id" value="{{$smart_id}}">
 
         @php
-        $spareImages = \App\Models\SmartImage::where('image_id',$spare->id)->get();
+        $spareImages = \App\Models\SmartImage::where('image_id',$smart_id)->get();
         @endphp
         
 
@@ -24,8 +24,6 @@
                         <img style="width:120px; height:120px;"  alt="user.png" src="{{asset('images/')}}/{{$image->filename}}">
                         <a class="dz-remove image_file" data-image="{{$image->filename}}" href="javascript:undefined;" >Remove file</a>
                     </div> 
-                    
-
                     
                 </div>
             @endforeach

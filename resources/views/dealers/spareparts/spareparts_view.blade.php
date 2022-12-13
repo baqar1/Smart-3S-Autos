@@ -101,7 +101,7 @@
                         @if($spare->exists)
                         <div class="row mt-3">
                             <div class="col-md-12 col-lg-12">
-                                @include('components.image')
+                                @include('components.image',['smart_id'=>$spare->id])
                             </div>
 
                         </div>

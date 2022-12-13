@@ -40,6 +40,7 @@ class Smart extends Model
                 'part_condition',
                 'part_id',
                 'workshop_name',
+                'status'
     ];
 
     public function order(){

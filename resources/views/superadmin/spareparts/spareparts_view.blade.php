@@ -13,6 +13,9 @@
                         <div class="form-group">
                             <h4 class="text-light bg-dark" style="text-align: center; padding: 10px; margin-top: 5px;"> @if($spare->exists) Edit Spare Parts @else Add New Spare Parts @endif</h4>
                         </div>
+                        @if ($spare->exists && $imageCount<= 0)
+                        <h5 class="error" style="text-align: center; padding: 10px; margin-top: 5px;">You must upload image to publish this spareparts</h5>
+                        @endif
                         <form action="{{route('spare.parts.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id" value="{{$spare->id??''}}">

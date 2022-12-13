@@ -9,6 +9,8 @@ use App\Models\SpareParts;
 use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HelperController;
+use App\Models\SmartImage;
 
 class SparePartsController extends Controller
 {
@@ -19,7 +21,8 @@ class SparePartsController extends Controller
 
     public function sparePartsView(Smart $spare){
         $dealers = User::where('type','dealer')->where('status','1')->get();
-        return view('superadmin.spareparts.spareparts_view',compact('spare','dealers'));
+        $imageCount = SmartImage::where('image_id',$spare->id)->count();
+        return view('superadmin.spareparts.spareparts_view',compact('spare','dealers','imageCount'));
     }
 
     public function sparePartsStore(SpareStoreRequest $request,Smart $smart){
@@ -30,23 +33,22 @@ class SparePartsController extends Controller
 
         $message = '';
         
-        if($request->img){
-            $imageName = time().'.'.$request->img->extension();  
-     
-            $request->img->move(public_path('images'), $imageName);
-        }
-        else{
+        
             if($request->id){
-                $spare = Smart::find($request->id);
-                $imageName = $spare->img;
+                $imageCount = SmartImage::where('image_id',$request->id)->count();
+                if($imageCount <= 0){
+                    $spare->update(['status'=>0]);
+                    return redirect()->back()->with('error','You must upload image to publish this spareparts');
+                }
+                $spare->update(['status'=>1]);
                 $message = 'Spare Part updated successfully';
             }
             else{
-                $imageName = null;
-                $message = 'New Spare Part created successfully';
+                $message = 'New Spare Part created successfully, but must upload images to publish';
+                return redirect(route('spare.parts.view',[$spare->id]))->with('success',$message);
             }
 
-        }
+        
         
         
         if($spare){
@@ -60,6 +62,7 @@ class SparePartsController extends Controller
 
     public function sparePartsDelete(Smart $spare){
         $spare->delete();
+        SmartImage::where('image_id',$spare->id)->delete();
         return redirect()->route('spare.parts.list')->with('success','Spare Part deleted successfully');
     }
 }

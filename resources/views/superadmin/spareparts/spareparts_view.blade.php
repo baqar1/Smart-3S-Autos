@@ -13,6 +13,9 @@
                         <div class="form-group">
                             <h4 class="text-light bg-dark" style="text-align: center; padding: 10px; margin-top: 5px;"> @if($spare->exists) Edit Spare Parts @else Add New Spare Parts @endif</h4>
                         </div>
+                        @if ($spare->exists && $imageCount<= 0)
+                        <h5 class="error" style="text-align: center; padding: 10px; margin-top: 5px;">You must upload image to publish this spareparts</h5>
+                        @endif
                         <form action="{{route('spare.parts.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id" value="{{$spare->id??''}}">
@@ -103,15 +106,6 @@
                                                 <span class="error">{{ $errors->first('workshop_name') }}</span>
                                             @endif
                                         </div>
-                                        <div class="col-md-4 col-lg-4">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <label class="form-label">SpareParts Image</label>
-                                                @if($spare->exists)
-                                                <img src="{{asset('images/')}}/{{$spare->img}}" class="img-fluid" width="150">
-                                                @endif
-                                            </div>
-                                            <input class="form-control shadow-sm" type="file" name="img">
-                                        </div>
                                     </div>
     
                                 </div>
@@ -119,6 +113,14 @@
                             </div>
 
                         </form>
+                        @if($spare->exists)
+                        <div class="row mt-3">
+                            <div class="col-md-12 col-lg-12">
+                                @include('components.image')
+                            </div>
+
+                        </div>
+                        @endif
                         
                         
 

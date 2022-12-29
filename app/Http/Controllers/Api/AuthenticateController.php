@@ -8,15 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules;
 
 class AuthenticateController extends Controller
 {
     public function register(Request $request) {
         try {
             $validateUser = Validator::make($request->all(),[
-                'name'=>'required',
+                'first_name'=>'required',
+                'last_name'=>'required',
                 'email'=>'required|email|unique:users,email',
-                'password'=>'required'
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                //'password'=>'required'
             ]);
             if ($validateUser->fails()) {
                 return response()->json([
@@ -26,7 +29,8 @@ class AuthenticateController extends Controller
                 ], 401);
             }
             $user = User::create([
-                'name'=>$request->name,
+                'name'=>$request->first_name,
+                'last_name'=>$request->last_name,
                 'email'=>$request->email,
                 'password'=>Hash::make($request->password),
                 'type'=>'user'

@@ -39,6 +39,8 @@
         });
 
         $('#order_status').change(function(){
+            alert('hello');
+            return false;
             var value = $(this).val();
             var order_id = $(this).data('id');
 

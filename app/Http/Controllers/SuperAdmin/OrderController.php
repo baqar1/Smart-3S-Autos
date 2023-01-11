@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -45,19 +46,28 @@ class OrderController extends Controller
     }
 
     public function createOrder(Request $request){
-        $validate = $request->validate([
+        $validateData = Validator::make($request->all(),[
             'user_id'=>'required',
             'smart_id'=>'required',
             'dealer_id'=>'required',
-            'item_type'=>'required',
+            //'item_type'=>'required',
             'price'=>'required',
             'order_status'=>'required'
         ]);
+        if ($validateData->fails()) {
+            return response()->json([
+                'status'=>false,
+                'message'=>'validation error',
+                'errors'=>$validateData->errors(),
+            ], 401);
+        }
+        
+        
         if($request->order_status==1){
             $orderExist = Order::where('user_id', $request->user_id)
                             ->where('smart_id', $request->smart_id)
                             ->where('dealer_id',$request->dealer_id)
-                            ->where('item_type',$request->item_type)
+                            //->where('item_type',$request->item_type)
                             ->where('order_status', 1)
                             ->first();
             if($orderExist){
@@ -67,7 +77,7 @@ class OrderController extends Controller
                     'order'=>$orderExist
                 ]);
             }
-            $order = Order::create($validate);
+            $order = Order::create($request->all());
             return response()->json([
                 'status'=>true,
                 'message'=>'success',
@@ -85,9 +95,16 @@ class OrderController extends Controller
     }
 
     public function cancelOrder(Request $request){
-        $request->validate([
+        $validateData = Validator::make($request->all(),[
             'order_id'=>'required',
         ]);
+        if ($validateData->fails()) {
+            return response()->json([
+                'status'=>false,
+                'message'=>'validation error',
+                'errors'=>$validateData->errors(),
+            ], 401);
+        }
         $orderExist = Order::find($request->order_id);
         if ($orderExist){
             $order = $orderExist->delete();
@@ -106,13 +123,25 @@ class OrderController extends Controller
     }
 
     public function approveOrder(Request $request){
-        $request->validate([
+        $validateData = Validator::make($request->all(),[
             'order_id'=>'required',
         ]);
+        if ($validateData->fails()) {
+            return response()->json([
+                'status'=>false,
+                'message'=>'validation error',
+                'errors'=>$validateData->errors(),
+            ], 401);
+        }
         $orderExist = Order::find($request->order_id);
         if($orderExist){
             $order = $orderExist->update([
                 'order_status'=>3// assign 3 means order is going for approval to super admin
+            ]);
+            return response()->json([
+                'status'=>true,
+                'message'=>'order updated successfully',
+                'order'=>$orderExist
             ]);
         }
         else{

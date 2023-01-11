@@ -38,13 +38,10 @@
             $('#order_list').DataTable();
         });
 
-        $('#order_status').change(function(){
-            alert('hello');
-            return false;
+        $('.order_status').change(function(){
             var value = $(this).val();
             var order_id = $(this).data('id');
 
-            console.log(value,order_id);
             $.ajax({
                 url: "{{route('order.status')}}",
                 data: {value:value,order_id:order_id},

@@ -33,7 +33,7 @@
                         </select>
 
                     @else
-                        <select name="order_status" id="order_status" data-id="{{$order->id}}" class="form-control">
+                        <select name="order_status"  data-id="{{$order->id}}" class="form-control order_status">
                             <option value="1" {{$order->order_status==1?'selected':''}}>Pending</option>
                             <option value="2" {{$order->order_status==2?'selected':''}}>Completed</option>
                             <option value="3" {{$order->order_status==3?'selected':''}}>Approval</option>

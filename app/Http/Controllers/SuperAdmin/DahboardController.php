@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class DahboardController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
+         
         return view('superadmin.dashboard');
         // if(Auth::user()->type=='super-admin'){
         //     return view('superadmin.dashboard');

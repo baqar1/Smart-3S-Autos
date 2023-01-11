@@ -6,22 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="description" content="">
-    <meta name="author" content="www.sigitechnologies.com">
+    <meta name="author" content="s3">
 
     <link rel="icon" href="{{asset('assets/images/logo/3S_logo.png')}}" type="image/x-icon">
         <!-- VENDOR CSS -->
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
 
     <link rel="stylesheet" href="{{asset('assets/vendor/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendor/charts-c3/plugin.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('assets/vendor/charts-c3/plugin.css')}}"/> --}}
+    {{-- <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendor/multi-select/css/multi-select.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendor/dropify/css/dropify.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/vendor/summernote/dist/summernote.css')}}" />
+    {{-- <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css')}}"> --}}
+    {{-- <link rel="stylesheet" href="{{asset('assets/vendor/multi-select/css/multi-select.css')}}"> --}}
+    {{-- <link rel="stylesheet" href="{{asset('assets/vendor/dropify/css/dropify.min.css')}}" /> --}}
+    {{-- <link rel="stylesheet" href="{{asset('assets/vendor/summernote/dist/summernote.css')}}" /> --}}
     
     
         <!-- MAIN CSS -->
@@ -29,10 +30,10 @@
     <link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
     
         <!--toastr-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <style>
         /* ===== Scrollbar CSS ===== */
         /* Firefox */
@@ -316,6 +317,8 @@
   @endif
  
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 @yield('scripts')
 
 
@@ -323,7 +326,8 @@
 <script src="{{asset('assets/bundles/libscripts.bundle.js')}}"></script>
 <script src="{{asset('assets/bundles/vendorscripts.bundle.js')}}"></script>
 <script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
-<script src="{{asset('assets/js/index.js')}}"></script>
+
+{{-- <script src="{{asset('assets/js/index.js')}}"></script> --}}
 
 
 <!--Table/Data Table JS-->
@@ -335,15 +339,15 @@
 
 
 <!--Image Uplaod And View JS -->
-<script src="{{asset('assets/vendor/dropify/js/dropify.min.js')}}"></script>
-<script src="{{asset('assets/js/pages/forms/dropify.js')}}"></script>
+{{-- <script src="{{asset('assets/vendor/dropify/js/dropify.min.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/js/pages/forms/dropify.js')}}"></script> --}}
 
 <!--Multi Select JS -->
-<script src="{{asset('assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script><!-- Multi Select Plugin Js -->
-<script src="{{asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js')}}"></script>
+{{-- <script src="{{asset('assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script><!-- Multi Select Plugin Js -->
+<script src="{{asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js')}}"></script> --}}
 
 <!--Summer Notes JS -->
-<script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
+{{-- <script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
 <script src="{{asset('assets/vendor/summernote/dist/summernote.js')}}"></script>
 
 <script>
@@ -353,7 +357,7 @@
 //     // Summernote
 //     $('.textarea').summernote()
 //   })
-  </script>
+  </script> --}}
 
   
  

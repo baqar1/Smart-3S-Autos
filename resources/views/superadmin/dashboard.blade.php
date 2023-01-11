@@ -1,4 +1,23 @@
 @extends('layouts.app')
+@php 
+use App\Models\User;
+use App\Models\Order;
+
+    $adminCommision = auth()->user()->wallet;
+    $totalEarning = User::sum('wallet')- $adminCommision;
+    $orderCounts = Order::selectRaw('count(*) as total_orders,
+                        (SELECT count(*) from orders where order_status = 1) as pending,
+                        (SELECT count(*) from orders where order_status = 2) as completed,
+                        (SELECT count(*) from orders where order_status = 3) as approval'
+                            
+                        )->first();
+    
+    $userCounts = User::selectRaw('count(*) as total_users,
+                        (SELECT count(*) from users where type = "dealer") as total_dealers'
+    
+    )->where('type','user')->first();
+                        
+@endphp
     @section('content')
     <style>
         .card {
@@ -96,7 +115,7 @@
                                         <div class="row align-items-center mb-2 d-flex">
                                             <div class="col-8">
                                                 <h2 class="d-flex align-items-center mb-0">
-                                                    3,243
+                                                    {{$orderCounts->total_orders}}
                                                 </h2>
                                             </div>
                                             <!--<div class="col-4 text-right">-->
@@ -119,7 +138,7 @@
                                         <div class="row align-items-center mb-2 d-flex">
                                             <div class="col-8">
                                                 <h2 class="d-flex align-items-center mb-0">
-                                                    15,070
+                                                    {{$userCounts->total_users}}
                                                 </h2>
                                             </div>
                                         </div>
@@ -139,7 +158,7 @@
                                         <div class="row align-items-center mb-2 d-flex">
                                             <div class="col-8">
                                                 <h2 class="d-flex align-items-center mb-0">
-                                                    578
+                                                    {{$userCounts->total_dealers}}
                                                 </h2>
                                             </div>
                                         </div>
@@ -159,7 +178,7 @@
                                         <div class="row align-items-center mb-2 d-flex">
                                             <div class="col-8">
                                                 <h2 class="d-flex align-items-center mb-0">
-                                                    Rs.11,610
+                                                    Rs.{{$orderCounts->pending}}
                                                 </h2>
                                             </div>
                                         </div>
@@ -183,7 +202,7 @@
                                             <div class="row align-items-center mb-2 d-flex">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        Rs.30,243
+                                                        {{$adminCommision}}
                                                     </h2>
                                                 </div>
                                             </div>
@@ -203,7 +222,7 @@
                                             <div class="row align-items-center mb-2 d-flex">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                         Rs.1,10,620
+                                                        {{$totalEarning}}
                                                     </h2>
                                                 </div>
                                             </div>
@@ -223,7 +242,7 @@
                                             <div class="row align-items-center mb-2 d-flex">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        578
+                                                        {{$orderCounts->completed}}
                                                     </h2>
                                                 </div>
                                             </div>
